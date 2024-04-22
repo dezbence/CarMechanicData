@@ -15,22 +15,25 @@ use App\Http\Controllers\MainController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post('/register',[AuthController::class,'register']);
-Route::post('/login',[AuthController::class,'login']);
+Route::post('/register', [AuthController::class,'register']);
+Route::post('/login', [AuthController::class,'login']);
 
-Route::middleware('auth:sanctum')->group(function(){
-    Route::post('/logout',[AuthController::class,'logout']);
-    Route::post('/logout-all-device',[AuthController::class,'logoutAllDevice']);
+Route::middleware('auth:sanctum')->group(function() {
+    Route::post('/logout', [AuthController::class,'logout']);
+    Route::post('/logout-all-device', [AuthController::class,'logoutAllDevice']);
 
-    Route::get('/user-data',[MainController::class,'getUserData']);
+    Route::get('/user-data', [MainController::class,'getUserData']);
 
-    Route::post('/search-cars',[MainController::class,'searchCars']);
-    Route::get('/repairs/{car_id}',[MainController::class,'getRepairs']);
-    Route::get('/parts/{car_id}/{repair_id}',[MainController::class,'getParts']);
+    Route::post('/search-cars', [MainController::class,'searchCars']);
+    Route::get('/repairs/{car_id}/{date?}', [MainController::class,'getRepairs']);
+    Route::get('/parts/{car_id}/{repair_id}', [MainController::class,'getParts']);
 
-    Route::put('/edit-car',[MainController::class,'editCar']);
-    Route::put('/edit-repair',[MainController::class,'editRepair']);
-    Route::put('/edit-part',[MainController::class,'editPart']);
-    
+    Route::put('/edit-car', [MainController::class,'editCar']);
+    Route::put('/edit-repair', [MainController::class,'editRepair']);
+    Route::put('/edit-part', [MainController::class,'editPart']);
+
+    Route::put('/delete-car/{id}', [MainController::class,'deleteCar']);
+    Route::put('/delete-repair/{id}', [MainController::class,'deleteRepair']);
+    Route::put('/delete-part/{id}', [MainController::class,'deletePart']);
 });
 

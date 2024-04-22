@@ -65,11 +65,12 @@ class MainController extends BaseController
         return  $this->sendResponse($car, 'Sikeres művelet!');
     }
 
-    function getRepairs($car_id) {
+    function getRepairs($car_id, $date = null) {
 
         $cars = Car::with([
-            'repairs' => function ($query) use($car_id) {
-                $query->where("car_id", '=', $car_id);
+            'repairs' => function ($query) use($car_id, $date) {
+                $query->where('car_id', '=', $car_id)
+                    ->where('date', 'like', '%'.$date.'%');
             }
             ])
                 ->where('user_id', '=', Auth::user()->id)
