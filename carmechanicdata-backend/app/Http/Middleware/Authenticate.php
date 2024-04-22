@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
 
 class Authenticate extends Middleware
 {
@@ -13,5 +14,10 @@ class Authenticate extends Middleware
     protected function redirectTo(Request $request): ?string
     {
         return $request->expectsJson() ? null : route('login');
+    }
+
+    protected function unauthenticated($request, array $guards){
+        $baseController = new BaseController();
+        abort($baseController->sendError('unauthorized',['error'=>'Bejelentkezés szükséges!'],401));
     }
 }
