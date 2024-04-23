@@ -35,5 +35,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/delete-car/{id}', [MainController::class,'deleteCar']);
     Route::put('/delete-repair/{id}', [MainController::class,'deleteRepair']);
     Route::put('/delete-part/{id}', [MainController::class,'deletePart']);
+
+    Route::post('/logout', [AuthController::class,'logout']);
+    Route::post('/logout-all-device', [AuthController::class,'logoutAllDevice']);
 });
 
