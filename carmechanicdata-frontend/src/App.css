@@ -1,0 +1,117 @@
+body {
+    --dark-1: #1e2328;
+    --dark-2: #2a2e34;
+    --dark-3: #3b3f46;
+
+    --bright-1: #ff930f;
+    --bright-2: #ffa536;
+    --bright-3: #fff95b;
+
+    --gradiant-1-3: linear-gradient(90deg, var(--bright-1) 0%, var(--bright-3) 100%);
+
+    --profile-background-gradiant: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
+
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(to left top, var(--dark-3), var(--dark-1));
+}
+
+.auth-card::before {
+    position: absolute;
+    content: '';
+    background: inherit;
+    height: 360px;
+    width: 650px;
+    left: -25px;
+    right: 0;
+    top: -25px;
+    bottom: 0;
+    box-shadow: inset 0 0 0 3000px rgba(150, 150, 150, 0.192);
+    filter: blur(10px);
+    border-radius: 15px;
+}
+
+.auth-card {
+
+    height: 320px;
+    width: 600px;
+    background: inherit;
+    border-radius: 15px;
+    border: 1px solid rgba(43, 43, 43, 0.568);
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+}
+
+input:focus {
+    outline: none;
+}
+
+.auth-input {
+    border: 0;
+    border-bottom: 1px solid var(--bright-1);
+    margin: 10px;
+    background-color: transparent;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    padding: 5px 5px 0px 50px;
+    color: black;
+}
+
+.auth-button {
+    border: 0;
+    background: var(--gradiant-1-3);
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    font-size: 24px;
+    padding: 5px 10px;
+    margin: 20px;
+    color: var(--dark-3);
+}
+
+.auth-button:hover {
+
+}
+
+.navbar {
+    display: flex;
+    justify-content: start;
+}
+
+.navbar *{
+    margin: 10px 15px;
+}
+
+.rounded-corners-gradient-borders {
+    width: 300px;
+    height: 80px;
+    border: solid 5px transparent;
+    border-radius: 80px;
+    background-image: linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.svg {
+    fill: black;
+    height: 35px;
+    width: 35px;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container svg{
+    position: absolute;
+    top: 22px;
+    left: 18px;
+}
