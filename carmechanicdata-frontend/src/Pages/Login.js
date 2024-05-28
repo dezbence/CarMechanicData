@@ -19,7 +19,6 @@ function Login() {
             auth.setToken(resp.data.data.token);
             auth.setName(resp.data.data.name);
             auth.setRole(resp.data.data.role);
-            auth.setIsLoggedIn(true);
             return toast.success('Successful login!');
         })
         .catch(err => {

@@ -21,49 +21,57 @@ const App = () => {
   const [token, setToken] = useState("")
   const [name, setName] = useState("");
   const [role, setRole] = useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const getUserData = (token) => {
-    if (token) {
-      return Axios.get('/user-data', { headers: { "Authorization": "Bearer " + token } })
-        .then(resp => { 
-            return setIsLoggedIn(true);
+  const logout = () => {
+    setToken("");
+    setName("");
+    setRole(0);
+    localStorage.removeItem('token');
+  };
+
+  const getUserData = (t) => {
+    if (t) {
+      return Axios.get('/user-data', { headers: { "Authorization": "Bearer " + t } })
+        .then(resp => {
+          console.log("seta data");
+          console.log(resp.data.data);
+            setToken(localStorage.getItem('token'));
+            setName(resp.data.data.name);
+            setRole(resp.data.data.role);
+            return;
         })
         .catch(err => {
-            return setIsLoggedIn(false);
+            return logout();
         })
     }
     return;
 }
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
-    getUserData(token);
-  }, [token])
+    getUserData(localStorage.getItem('token'));
+  }, [])
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      setToken("");
-      setName("");
-      setRole(0);
-      localStorage.removeItem('token');
-    }
-  }, [isLoggedIn])
+
+      // setToken("");
+      // setName("");
+      // setRole(0);
+      // localStorage.removeItem('token');
+
 
   return (
       <div>
         <ToastContainer position='top-center' theme='colored'/>
         <BrowserRouter>
         
-          <AuthContext.Provider value={{token, setToken, name, setName, role, setRole, isLoggedIn, setIsLoggedIn}}>
+          <AuthContext.Provider value={{token, setToken, name, setName, role, setRole, logout}}>
             <Routes>
               <Route path='' element={<Home/>}/>
               <Route path='/register' element={<Register/>}/>
               <Route path='/login' element={<Login/>}/>
               <Route path='/cars' element={
-                <ProtectedRoute>
+                //<ProtectedRoute>
                   <Cars/>
-                </ProtectedRoute>
+                //</ProtectedRoute>
               }/>
               <Route path='*' element={<PageNotFound/>}/>
             </Routes>

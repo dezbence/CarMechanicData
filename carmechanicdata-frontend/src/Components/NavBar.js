@@ -13,7 +13,7 @@ function NavBar() {
     return Axios.post('/logout', '', { headers: { "Authorization": "Bearer " + token } })
         .then(resp => {
             localStorage.removeItem("token");
-            auth.setIsLoggedIn(false);
+            auth.logout();
             return toast.success('Successful logout!');
         })
         .catch(err => {
@@ -24,7 +24,7 @@ function NavBar() {
   const logOutAllDevice = (token) => {
     return Axios.post('/logout-all-device', '', { headers: { "Authorization": "Bearer " + token } })
       .then(resp => {
-        auth.setIsLoggedIn(false);
+        auth.logout();
         return toast.success('Successful logout on all device!');
       })
       .catch(err => {
@@ -38,7 +38,7 @@ function NavBar() {
       <Link to="/cars">Cars</Link>
       <Link to="/register">Register</Link>
       <Link to="/login">Login</Link>
-      <h6>Name: {auth.name}, token: {auth.token} role: {auth.role} islogged: {auth.isLoggedIn ? "igen" : "nem"}</h6>
+      <h6>Name: {auth.name}, token: {auth.token} role: {auth.role}</h6>
       <h5 onClick={(e) => logout(auth.token)}>logout</h5>
       <h5 onClick={(e) => logOutAllDevice(auth.token)}>logout on all device</h5>
 
