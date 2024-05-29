@@ -11,8 +11,8 @@ function Cars() {
   const [cars, setCars] = useState();
   const auth = useContext(AuthContext);
 
-  const searchCars = (data, token) => {
-    return Axios.post('/search-cars', data)
+  const searchCars = (data) => {
+    return Axios.post('/search-cars', data, { headers: { "Authorization": "Bearer " + auth.token } })
         .then(resp => {
           console.log(resp.data);
         })
@@ -29,10 +29,10 @@ function Cars() {
         <input onChange={(e) => searchFields.type = e.target.value} id='type' type='text' placeholder='Type'></input>
         <input onChange={(e) => searchFields.owner = e.target.value} id='owner' type='text' placeholder='owner'></input>
         <input onChange={(e) => searchFields.license_number = e.target.value} id='license_number' type='text' placeholder='License number'></input>
-        <button onClick={(e) => searchCars(searchFields, auth.token)} className='auth-button'>search</button>
+        <button onClick={(e) => searchCars(searchFields)} className='auth-button'>search</button>
       </div>
-      <div class="data-container">
-        <div class="data-card">
+      <div className="data-container">
+        <div className="data-card">
           <div className='data-card-data'>
             <input type='text' value='asd' disabled></input>
             <p>Type</p>

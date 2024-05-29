@@ -30,7 +30,6 @@ function Login() {
     <div>
       <NavBar/>
       <div className="auth-container">
-
           <div className='input-container'>
             <Mailsvg className='svg'/>
             <input onChange={(e) => loginData.email = e.target.value} className='auth-input' type='text' placeholder='Email'></input>

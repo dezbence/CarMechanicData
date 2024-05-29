@@ -27,7 +27,7 @@ class MainController extends BaseController
     function searchCars(Request $request) {
 
         $cars = Car::where("user_id", '=', Auth::user()->id)
-            ->where("brand", "like", "%".$request->all()['brand']."%")
+            ->where('brand', 'like', '%'.$request->all()['brand'].'%')
             ->where('type', 'like', '%'.$request->all()['type'].'%')
             ->where('owner', 'like', '%'.$request->all()['owner'].'%')
             ->where('license_number', 'like', '%'.$request->all()['license_number'].'%')

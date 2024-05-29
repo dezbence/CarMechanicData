@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom';
 import '../App.css';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Utility/AuthContext';
 import Axios from '../services/dataservice.js';
 import { toast } from 'react-toastify';
+import {ReactComponent as Personsvg} from '../assets/person.svg';
 
 function NavBar() {
 
   const auth = useContext(AuthContext);
+  const [smallMenu, setSmallMenu] = useState(false);
+
+  const toggleSmallMenu = () => {
+    setSmallMenu(!smallMenu);
+  }
 
   const logout = (token) => {
     return Axios.post('/logout', '', { headers: { "Authorization": "Bearer " + token } })
@@ -34,15 +40,27 @@ function NavBar() {
 
   return (
     <div className='navbar'>
-      <Link to="/">Home</Link>
-      <Link to="/cars">Cars</Link>
-      <Link to="/register">Register</Link>
-      <Link to="/login">Login</Link>
-      <h6>Name: {auth.name}, token: {auth.token} role: {auth.role}</h6>
-      <h5 onClick={(e) => logout(auth.token)}>logout</h5>
-      <h5 onClick={(e) => logOutAllDevice(auth.token)}>logout on all device</h5>
-
+      <div className='navbar-left'>
+        <Link className='link' to="/">Home</Link>
+        <Link className='link' to="/cars">Cars</Link>
+        <h6>Name: {auth.name}, token: {auth.token} role: {auth.role}</h6>
+      </div>
+      <div className="navbar-right">
+        {auth.token ? <div onMouseOut={(e) => setSmallMenu(false)} className="person-icon">
+          <Personsvg onClick={toggleSmallMenu}/>
+            {smallMenu && 
+              <div className='small-menu'>
+                <div className='small-menu-item' onClick={(e) => logout(auth.token)}>logout</div>
+                <div className='small-menu-item small-menu-item-last' onClick={(e) => logOutAllDevice(auth.token)}>logout on all device</div>
+              </div>}
+          </div> : <div className='navbar-right'>
+            <Link className='link link-auth' to="/register">Register</Link>
+            <div className='slash'>/</div>
+            <Link className='link link-auth' to="/login">Login</Link>
+          </div>}
+      </div>
     </div>
+    
   );
 }
 

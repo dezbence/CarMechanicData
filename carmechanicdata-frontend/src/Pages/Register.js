@@ -7,19 +7,20 @@ import Axios from '../services/dataservice.js';
 import { useContext, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function Register() {
 
+  const navigate = useNavigate();
   const [registerData, setRegisterData] = useState({name: "", email: "", password: "", confirm_password: "", role: 0});
 
   const register = (data) => {
     return Axios.post('/register', data)
         .then(resp => {
-          console.log(registerData);
-          console.log(resp.data); 
-          return toast.success("Successful register!")
-           
+          setRegisterData({name: "", email: "", password: "", confirm_password: "", role: 0});
+          navigate('/login');
+          return toast.success("Successful register!")           
         })
         .catch(err => {
             return toast.error(err.response.data.data);

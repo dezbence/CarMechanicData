@@ -83,11 +83,98 @@ input:focus {
 
 .navbar {
     display: flex;
+    justify-content: space-between;
+    background-color: var(--dark-3);
+    height: 60px;
+}
+
+.navbar-left {
+    display: flex;
     justify-content: start;
+}
+
+.navbar-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar *{
     margin: 10px 15px;
+}
+
+.link {
+    color: var(--bright-1);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.link-auth {
+    margin: 5px;
+    font-size: 14px;
+}
+
+.slash {
+    color: white;
+    margin: 0px;
+    font-size: 14px;
+}
+
+.person-icon {
+    border-radius: 50%;
+    background-color: var(--dark-3);
+    height: 36px;
+    width: 36px;
+    border: 2px solid var(--bright-1);
+    position: relative;
+}
+
+.person-icon svg{
+    height: 30px;
+    width: 30px;
+    fill: white;
+    position: absolute;
+    top: -8px;
+    left: -12px;
+}
+
+.small-menu {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-3);
+    border: 2px solid var(--dark-1);
+    border-radius: 10px;
+    margin: 10px;
+    position: absolute;
+    top: 28px;
+    right: -2px;
+}
+
+.small-menu-outline {
+    width: 150px;
+    position: absolute;
+    top: 28px;
+    right: -2px;
+}
+
+.small-menu-item {
+    padding: 3px 5px;
+    width: 140px;
+    color: var(--bright-2);
+    border-bottom: 2px solid var(--dark-1);
+    text-align: center;
+    margin: 0;
+}
+
+.small-menu-item-last {
+    border-bottom: none;
 }
 
 .rounded-corners-gradient-borders {
@@ -148,3 +235,4 @@ input:focus {
 p {
     color: white;
 }
+
