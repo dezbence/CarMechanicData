@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../App.css';
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../Utility/AuthContext';
+import { AuthContext, UserModeContext } from '../Utility/Contexts.js';
 import Axios from '../services/dataservice.js';
 import { toast } from 'react-toastify';
 import {ReactComponent as Personsvg} from '../assets/person.svg';
@@ -9,6 +9,7 @@ import {ReactComponent as Personsvg} from '../assets/person.svg';
 function NavBar() {
 
   const auth = useContext(AuthContext);
+  const userMode = useContext(UserModeContext);
   const [smallMenu, setSmallMenu] = useState(false);
 
   const toggleSmallMenu = () => {
@@ -51,7 +52,8 @@ function NavBar() {
             {smallMenu && 
               <div className='small-menu'>
                 <div className='small-menu-item' onClick={(e) => logout(auth.token)}>logout</div>
-                <div className='small-menu-item small-menu-item-last' onClick={(e) => logOutAllDevice(auth.token)}>logout on all device</div>
+                <div className='small-menu-item' onClick={(e) => logOutAllDevice(auth.token)}>logout on all device</div>
+                <div onClick={(e) => userMode.setEditMode(!userMode.editMode)} className='small-menu-item small-menu-item-last'>Mode: {userMode.editMode ? 'Edit' : 'Readonly'}</div>
               </div>}
           </div> : <div className='navbar-right'>
             <Link className='link link-auth' to="/register">Register</Link>

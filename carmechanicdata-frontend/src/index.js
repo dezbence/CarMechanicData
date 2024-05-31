@@ -10,7 +10,7 @@ import Login from './Pages/Login';
 import Cars from './Pages/Cars';
 import PageNotFound from './Pages/PageNotFound';
 import ProtectedRoute from './Utility/ProtectedRoute';
-import { AuthContext } from './Utility/AuthContext';
+import { AuthContext, UserModeContext } from './Utility/Contexts.js';
 import { ToastContainer } from 'react-toastify';
 import Axios from './services/dataservice.js';
 
@@ -21,6 +21,7 @@ const App = () => {
   const [token, setToken] = useState("")
   const [name, setName] = useState("");
   const [role, setRole] = useState(0);
+  const [editMode, setEditMode] = useState(false);
 
   const logout = () => {
     setToken("");
@@ -64,17 +65,19 @@ const App = () => {
         <BrowserRouter>
         
           <AuthContext.Provider value={{token, setToken, name, setName, role, setRole, logout}}>
-            <Routes>
-              <Route path='' element={<Home/>}/>
-              <Route path='/register' element={<Register/>}/>
-              <Route path='/login' element={<Login/>}/>
-              <Route path='/cars' element={
-                //<ProtectedRoute>
-                  <Cars/>
-                //</ProtectedRoute>
-              }/>
-              <Route path='*' element={<PageNotFound/>}/>
-            </Routes>
+            <UserModeContext.Provider value={{editMode, setEditMode}}>
+              <Routes>
+                <Route path='' element={<Home/>}/>
+                <Route path='/register' element={<Register/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/cars' element={
+                  <ProtectedRoute>
+                    <Cars/>
+                  </ProtectedRoute>
+                }/>
+                <Route path='*' element={<PageNotFound/>}/>
+              </Routes>
+            </UserModeContext.Provider>
           </AuthContext.Provider>
         </BrowserRouter>
       </div>

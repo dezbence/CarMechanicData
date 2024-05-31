@@ -211,7 +211,7 @@ input:focus {
 .data-card-data {
     margin: 10px 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
 }
 
 .data-card-bg {
@@ -230,6 +230,18 @@ input:focus {
 .data-container {
     display: flex;
     justify-content: center;
+    margin: 10px 0px; 
+}
+
+.edit {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.edit svg {
+    width: 28px;
+    height: 28px;
 }
 
 p {

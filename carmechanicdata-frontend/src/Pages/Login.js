@@ -3,7 +3,7 @@ import NavBar from '../Components/NavBar';
 import {ReactComponent as Mailsvg} from '../assets/mail.svg';
 import {ReactComponent as Locksvg} from '../assets/lock.svg';
 import { useContext, useState } from 'react';
-import { AuthContext } from '../Utility/AuthContext';
+import { AuthContext } from '../Utility/Contexts.js';
 import Axios from '../services/dataservice.js';
 import { toast } from 'react-toastify';
 

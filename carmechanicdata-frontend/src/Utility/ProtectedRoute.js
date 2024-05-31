@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Route, useNavigate } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "./Contexts.js";
 import { toast } from "react-toastify";
 const ProtectedRoute = (props) => {
 
