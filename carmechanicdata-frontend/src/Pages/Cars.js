@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import { AuthContext, UserModeContext } from '../Utility/Contexts.js';
 import {ReactComponent as Editsvg} from '../assets/edit.svg';
 import {ReactComponent as Deletesvg} from '../assets/delete.svg';
+import {ReactComponent as Cancelsvg} from '../assets/cancel.svg';
+import {ReactComponent as Savesvg} from '../assets/save.svg';
 
 function Cars() {
 
@@ -53,14 +55,18 @@ function Cars() {
       {cars && cars.map((item, index) => (
         <div className="data-container">
         <div className="data-card">
-          <div className='data-card-data'>
-            <p>{item.brand}</p>
-            <p>{item.type}</p>
-            <p>{item.owner}</p>
-            <p>{item.license_number}</p>
+          <div className='data-card-data' isEdited={true} >
+            <input className='display' disabled type='text' defaultValue={item.brand}/>
+            <input className='display' disabled type='text' defaultValue={item.type}/>
+            <input className='display' disabled type='text' defaultValue={item.owner}/>
+            <input className='display' disabled type='text' defaultValue={item.license_number}/>
             {userMode.editMode && <div className='edit'>
-              <Editsvg/>
+              <Editsvg onClick={this.isEdited=false}/>
               <Deletesvg/>
+            </div>}
+            {<div className='edit'>
+              <Savesvg/>
+              <Cancelsvg/>
             </div>}
           </div>
           <div className='data-card-bg'></div>

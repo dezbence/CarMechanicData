@@ -171,10 +171,23 @@ input:focus {
     border-bottom: 2px solid var(--dark-1);
     text-align: center;
     margin: 0;
+    cursor: pointer;
+}
+
+.small-menu-item:hover {
+    text-decoration: underline;
 }
 
 .small-menu-item-last {
     border-bottom: none;
+}
+
+.small-menu-outer {
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 28px;
+    right: -2px;
 }
 
 .rounded-corners-gradient-borders {
@@ -242,9 +255,17 @@ input:focus {
 .edit svg {
     width: 28px;
     height: 28px;
+    cursor: pointer;
 }
 
 p {
     color: white;
 }
 
+.display {
+    all: unset;
+}
+
+.display-active {
+    
+}

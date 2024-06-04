@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import '../App.css';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext, UserModeContext } from '../Utility/Contexts.js';
@@ -11,6 +11,7 @@ function NavBar() {
   const auth = useContext(AuthContext);
   const userMode = useContext(UserModeContext);
   const [smallMenu, setSmallMenu] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSmallMenu = () => {
     setSmallMenu(!smallMenu);
@@ -21,6 +22,7 @@ function NavBar() {
         .then(resp => {
             localStorage.removeItem("token");
             auth.logout();
+            navigate('/');
             return toast.success('Successful logout!');
         })
         .catch(err => {
@@ -32,6 +34,7 @@ function NavBar() {
     return Axios.post('/logout-all-device', '', { headers: { "Authorization": "Bearer " + token } })
       .then(resp => {
         auth.logout();
+        navigate('/');
         return toast.success('Successful logout on all device!');
       })
       .catch(err => {
@@ -47,13 +50,13 @@ function NavBar() {
         <h6>Name: {auth.name}, token: {auth.token} role: {auth.role}</h6>
       </div>
       <div className="navbar-right">
-        {auth.token ? <div onMouseOut={(e) => setSmallMenu(false)} className="person-icon">
+        {auth.token ? <div onMouseLeave={(e) => setSmallMenu(false)} className="person-icon">
           <Personsvg onClick={toggleSmallMenu}/>
             {smallMenu && 
               <div className='small-menu'>
-                <div className='small-menu-item' onClick={(e) => logout(auth.token)}>logout</div>
-                <div className='small-menu-item' onClick={(e) => logOutAllDevice(auth.token)}>logout on all device</div>
-                <div onClick={(e) => userMode.setEditMode(!userMode.editMode)} className='small-menu-item small-menu-item-last'>Mode: {userMode.editMode ? 'Edit' : 'Readonly'}</div>
+                  <div onClick={(e) => userMode.setEditMode(!userMode.editMode)} className='small-menu-item'>Mode: {userMode.editMode ? 'Edit' : 'Readonly'}</div>
+                  <div className='small-menu-item' onClick={(e) => logout(auth.token)}>logout</div>
+                  <div className='small-menu-item small-menu-item-last' onClick={(e) => logOutAllDevice(auth.token)}>logout on all device</div>         
               </div>}
           </div> : <div className='navbar-right'>
             <Link className='link link-auth' to="/register">Register</Link>

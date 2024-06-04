@@ -22,6 +22,7 @@ const App = () => {
   const [name, setName] = useState("");
   const [role, setRole] = useState(0);
   const [editMode, setEditMode] = useState(false);
+  const [editOne, setEditOne] = useState(false);
 
   const logout = () => {
     setToken("");
@@ -30,7 +31,7 @@ const App = () => {
     localStorage.removeItem('token');
   };
 
-  const getUserData = (t) => {
+  const getUserData = async (t) => {
     if (t) {
       return Axios.get('/user-data', { headers: { "Authorization": "Bearer " + t } })
         .then(resp => {
@@ -48,8 +49,8 @@ const App = () => {
     return;
 }
 
-  useEffect(() => {
-    getUserData(localStorage.getItem('token'));
+  useEffect(async () => {
+    await getUserData(localStorage.getItem('token'));
   }, [])
 
 
@@ -65,7 +66,7 @@ const App = () => {
         <BrowserRouter>
         
           <AuthContext.Provider value={{token, setToken, name, setName, role, setRole, logout}}>
-            <UserModeContext.Provider value={{editMode, setEditMode}}>
+            <UserModeContext.Provider value={{editMode, setEditMode, editOne, setEditOne}}>
               <Routes>
                 <Route path='' element={<Home/>}/>
                 <Route path='/register' element={<Register/>}/>

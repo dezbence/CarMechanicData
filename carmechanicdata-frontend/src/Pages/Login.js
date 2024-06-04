@@ -6,10 +6,12 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../Utility/Contexts.js';
 import Axios from '../services/dataservice.js';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({email: "", password: ""});
 
   const login = async (data) => {
@@ -19,6 +21,7 @@ function Login() {
             auth.setToken(resp.data.data.token);
             auth.setName(resp.data.data.name);
             auth.setRole(resp.data.data.role);
+            navigate('/')
             return toast.success('Successful login!');
         })
         .catch(err => {
@@ -40,7 +43,7 @@ function Login() {
           </div>
           
           <button onClick={(e) => login(loginData)} className='auth-button'>Login</button>
-
+        
       </div>
     </div>
   );
